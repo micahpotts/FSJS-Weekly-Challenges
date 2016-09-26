@@ -22,7 +22,6 @@ function openBlock (id) {
     });
 
 
-
 }
 //When link is clicked it runs openBlock and passes the "id"
 $("#menu li a").click(function() {
@@ -31,6 +30,14 @@ $("#menu li a").click(function() {
 
 // TODO: add the "hover" class to the menu items when you hover over them
 
+$("ul li a").hover(function() {
+	$(this).addClass("hover")},
+	function() {
+		$(this).removeClass("hover");
+	});
 
 // TODO: set up the tooltip plugin on all of the links in the menu
 
+$('ul li a').tooltip({
+	delay: 1000
+});
