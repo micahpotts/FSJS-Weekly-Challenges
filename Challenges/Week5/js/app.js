@@ -23,3 +23,52 @@ function addPokemon(name) {
 
     Be creative, you can style/arrange the detail information however you like! 
 */
+
+var pokeAPI = "http://pokeapi.co/api/v2/pokemon";
+var poke;
+
+function getPokemon(url) {
+    //I don't need to pass data in .getJSON bc I'm using default
+    $.getJSON(url, function(data) {
+        console.log(data);
+        poke = data;
+        $(".poke-card").remove();
+        $.each(poke.results, function(i, item) {
+            addPokemon(item.name);
+        });
+        if(!poke.next) {//disable button
+            $("#next").prop("disabled", true);
+        } else {
+            $("#next").prop("disabled", false);
+        }
+        if(!poke.previous) {//disable button
+            $("#previous").prop("disabled", true);
+        } else {
+            $("#previous").prop("disabled", false);
+        }
+    });
+};
+
+getPokemon(pokeAPI);
+
+$(".btn").click(function() {
+    if($(this).attr("id") == "next") {
+        getPokemon(poke.next);
+    } else {
+        getPokemon(poke.previous);
+    }
+});
+
+/*$('#previous').click(function() {
+    getPokemon(poke.previous);
+});*/
+
+
+
+
+
+
+
+
+
+
